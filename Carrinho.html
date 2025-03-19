@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bolos da Ana</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style3.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Logotipo -->
+                    <a class="navbar-brand" href="#">
+                        <img src="Fotos/logo.jpg" alt="Logotipo Bolos da Ana">
+                    </a>
+    
+                    <!-- Botão de menu para dispositivos móveis -->
+                    <button class="navbar-toggler" type="button2" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <!-- Itens do menu -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Inicio.html">Início</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Cardapio.html">Cardápio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Carrinho.html">Carrinho</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Contato.html">Contato</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+    <div class="qr-code">
+        <h4>Pagamento via Mercado Pago</h4>
+        <img id="qrCode" src="https://via.placeholder.com/200" alt="QR Code">
+        <p>Escaneie o QR Code para pagar.</p>
+    </div>
+
+    <footer>
+        <p>&copy; PI-2025-UNIVESP - Doce Conexão - Bolos da Ana</p>
+    </footer>
+
+    <script>
+        // Lista de pedidos
+        let pedidos = [];
+
+        // Função para adicionar pedido
+        function adicionarPedido(doce) {
+            pedidos.push(doce);
+            alert(`${doce} adicionado ao pedido!`);
+        }
+
+        // Função para gerar QR Code e enviar mensagem
+        function finalizarPedido() {
+            if (pedidos.length === 0) {
+                alert("Nenhum pedido foi realizado.");
+                return;
+            }
+
+            // Gerar QR Code (exemplo com link do Mercado Pago)
+            const qrCodeImg = document.getElementById('qrCode');
+            qrCodeImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.mercadopago.com.br";
+
+            // Enviar mensagem via WhatsApp
+            const mensagem = `Pedido realizado: ${pedidos.join(", ")}`;
+            const linkWhatsApp = `https://wa.me/SEUNUMERO?text=${encodeURIComponent(mensagem)}`;
+            window.open(linkWhatsApp, '_blank');
+
+            // Limpar lista de pedidos
+            pedidos = [];
+        }
+
+        // Botão para finalizar pedido
+        const botaoFinalizar = document.createElement('button');
+        botaoFinalizar.textContent = "Finalizar Pedido";
+        botaoFinalizar.style.display = "block";
+        botaoFinalizar.style.margin = "20px auto";
+        botaoFinalizar.style.padding = "10px 20px";
+        botaoFinalizar.style.backgroundColor = "#28a745";
+        botaoFinalizar.style.color = "white";
+        botaoFinalizar.style.border = "none";
+        botaoFinalizar.style.borderRadius = "5px";
+        botaoFinalizar.style.cursor = "pointer";
+        botaoFinalizar.onclick = finalizarPedido;
+        document.body.insertBefore(botaoFinalizar, document.querySelector('footer'));
+    </script>
+</body>
+</html>
